@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Translate To English",
     "version": "1.0",
     "description": "自动将输入的文本翻译成英文并替换原内容",
@@ -9,25 +9,18 @@
     "permissions": [
         "activeTab",
         "storage",
+        "scripting",
+        "host_permissions"
+    ],
+    "host_permissions": [
         "https://translate.googleapis.com/"
     ],
-    "commands": {
-        "translate_and_replace": {
-            "suggested_key": {
-                "default": "Ctrl+Shift+T",
-                "mac": "Command+Shift+T"
-            },
-            "description": "翻译并替换当前输入框中的文本"
-        }
-    },
-    "browser_action": {
-        "default_icon": "icon.png"
+    "action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
     },
     "background": {
-        "scripts": [
-            "background.js"
-        ],
-        "persistent": false
+        "service_worker": "background.js"
     },
     "content_scripts": [
         {
@@ -35,8 +28,12 @@
                 "<all_urls>"
             ],
             "js": [
-                "content.js"
+                {
+                    "file": "content.js",
+                    "all_frames": true
+                }
             ]
         }
     ]
 }
+
