@@ -12,9 +12,12 @@
         "scripting",
         "host_permissions"
     ],
-    "host_permissions": [
+    "permissions": [
+        "activeTab",
+        "storage",
+        "scripting",
         "https://translate.googleapis.com/"
-    ],
+      ],
     "action": {
         "default_icon": "icon.png",
         "default_popup": "popup.html"
@@ -24,15 +27,9 @@
     },
     "content_scripts": [
         {
-            "matches": [
-                "<all_urls>"
-            ],
-            "js": [
-                {
-                    "file": "content.js",
-                    "all_frames": true
-                }
-            ]
+            "matches": ["<all_urls>"],
+            "js": ["content.js"],
+            "all_frames": true
         }
     ]
 }
